@@ -5,4 +5,5 @@ var CommandMapping = map[string]Command{
 	"status":               new(StatusInternetCafe),
 	"leave":                new(LeavePC),
 	"book":                 new(AllocatePC),
+	"get_pc_by_age":        new(GetPCByAge),
 }

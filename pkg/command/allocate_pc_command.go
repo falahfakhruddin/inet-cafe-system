@@ -2,6 +2,7 @@ package command
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 
 	"internet-cafe/pkg/model"
@@ -33,9 +34,14 @@ func (a *AllocatePC) ParseArgs(args string) error {
 		return InvalidArgument
 	}
 
+	intAge, err := strconv.Atoi(splitArgs[1])
+	if err != nil {
+		return err
+	}
+
 	a.user = &model.User{
 		Name: splitArgs[0],
-		Age:  splitArgs[1],
+		Age:  int64(intAge),
 	}
 	return nil
 }

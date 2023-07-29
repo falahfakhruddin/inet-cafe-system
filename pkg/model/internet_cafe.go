@@ -39,16 +39,16 @@ func GetInternetCafe() (*InternetCafe, error) {
 	return savedInternetCafe, nil
 }
 
-func (p *InternetCafe) Save() {
-	savedInternetCafe = p
+func (i *InternetCafe) Save() {
+	savedInternetCafe = i
 }
 
-func (p *InternetCafe) AllocatePC(car *User) *PC {
-	for _, pc := range p.ListPC {
+func (i *InternetCafe) AllocatePC(user *User) *PC {
+	for _, pc := range i.ListPC {
 		if pc.IsFree() {
 			pc.User = &User{
-				Name: car.Name,
-				Age:  car.Age,
+				Name: user.Name,
+				Age:  user.Age,
 			}
 			return pc
 		}
@@ -56,12 +56,23 @@ func (p *InternetCafe) AllocatePC(car *User) *PC {
 	return nil
 }
 
-func (p *InternetCafe) LeavePC(pcID uint64) bool {
-	for _, pc := range p.ListPC {
+func (i *InternetCafe) LeavePC(pcID uint64) bool {
+	for _, pc := range i.ListPC {
 		if pc.ID == pcID {
 			pc.FreeSlot()
 			return true
 		}
 	}
 	return false
+}
+
+func (i *InternetCafe) GetPCIdByAge(age int64) []uint64 {
+	var listPCId []uint64
+	for _, pc := range i.ListPC {
+		if pc.User != nil && pc.User.isSameAge(age) {
+			listPCId = append(listPCId, pc.ID)
+		}
+	}
+
+	return listPCId
 }
