@@ -12,4 +12,5 @@ create_internet_cafe <total pc capacity number>
 status
 book <user name> <user age>
 leave <pc number>
+get_pc_by_age <user age>
 ```
