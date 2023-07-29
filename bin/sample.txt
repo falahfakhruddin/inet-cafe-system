@@ -1,0 +1,12 @@
+wrong_command
+status
+create_internet_cafe 3
+status
+book Falah 17
+book Bambang 19
+book Kodai 20
+status
+book Victor 28
+leave 2
+leave 1
+book Udin 21
