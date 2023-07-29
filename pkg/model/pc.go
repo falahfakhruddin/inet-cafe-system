@@ -5,10 +5,10 @@ type PC struct {
 	User *User
 }
 
-func (s *PC) IsFree() bool {
-	return s.User == nil
+func (p *PC) IsFree() bool {
+	return p.User == nil
 }
 
-func (s *PC) FreeSlot() {
-	s.User = nil
+func (p *PC) FreeSlot() {
+	p.User = nil
 }
