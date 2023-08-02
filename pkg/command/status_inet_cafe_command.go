@@ -2,16 +2,15 @@ package command
 
 import (
 	"fmt"
-
-	"internet-cafe/pkg/model"
+	"internet-cafe/pkg/dao"
 )
 
 type StatusInternetCafe struct {
-	arg string
+	InetCafeDao *dao.InternetCafeDao
 }
 
 func (s *StatusInternetCafe) Run() error {
-	inetCafe, err := model.GetInternetCafe()
+	inetCafe, err := s.InetCafeDao.Get()
 	if err != nil {
 		return err
 	}
