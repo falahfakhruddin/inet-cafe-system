@@ -2,17 +2,17 @@ package command
 
 import (
 	"fmt"
+	"internet-cafe/pkg/dao"
 	"strconv"
-
-	"internet-cafe/pkg/model"
 )
 
 type GetPCByAge struct {
-	age int64
+	InetCafeDao *dao.InternetCafeDao
+	age         int64
 }
 
 func (g *GetPCByAge) Run() error {
-	inetCafe, err := model.GetInternetCafe()
+	inetCafe, err := g.InetCafeDao.Get()
 	if err != nil {
 		return err
 	}

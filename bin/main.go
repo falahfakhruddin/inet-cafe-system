@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	ps1 = "\x1b[32;1m>> \x1b[0m"
+	ps1 = "$ "
 )
 
 func main() {
@@ -26,6 +26,8 @@ func main() {
 		for cmdScanner.Scan() {
 			cmdInput := cmdScanner.Text()
 			cmdInput = strings.TrimRight(cmdInput, "\n")
+			fmt.Print(ps1)
+			fmt.Println(cmdInput)
 			if cmdInput != "" {
 				executeCommand(cmdInput)
 			}

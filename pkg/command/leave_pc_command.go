@@ -2,17 +2,17 @@ package command
 
 import (
 	"fmt"
+	"internet-cafe/pkg/dao"
 	"strconv"
-
-	"internet-cafe/pkg/model"
 )
 
 type LeavePC struct {
-	pcNumber uint64
+	InetCafeDao *dao.InternetCafeDao
+	pcNumber    uint64
 }
 
 func (l *LeavePC) Run() error {
-	inetCafe, err := model.GetInternetCafe()
+	inetCafe, err := l.InetCafeDao.Get()
 	if err != nil {
 		return err
 	}

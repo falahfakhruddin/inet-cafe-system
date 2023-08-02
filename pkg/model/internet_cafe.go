@@ -27,20 +27,8 @@ func NewInternetCafe(capacity uint64) (*InternetCafe, error) {
 		inetCafe.ListPC = append(inetCafe.ListPC, pc)
 		index++
 	}
-	inetCafe.Save()
 
 	return inetCafe, nil
-}
-
-func GetInternetCafe() (*InternetCafe, error) {
-	if savedInternetCafe == nil {
-		return nil, fmt.Errorf("internet cafe not found")
-	}
-	return savedInternetCafe, nil
-}
-
-func (i *InternetCafe) Save() {
-	savedInternetCafe = i
 }
 
 func (i *InternetCafe) AllocatePC(user *User) *PC {

@@ -2,6 +2,7 @@ package command
 
 import (
 	"fmt"
+	"internet-cafe/pkg/dao"
 	"strings"
 )
 
@@ -20,11 +21,18 @@ var (
 )
 
 func InitCommand(commandCli string) (*MainCommand, error) {
+	// Parse CLI Command
 	cmds := strings.SplitN(commandCli, " ", 2)
-	command, exists := CommandMapping[cmds[0]]
-	if !exists {
+
+	// Initialize Dependencies
+	dep := InitializeDependencies()
+
+	// Resolve CLI command to machine state command
+	command, err := GetCommand(cmds[0], dep)
+	if err != nil {
 		return nil, fmt.Errorf("unknown command")
 	}
+
 	mainCommand := &MainCommand{
 		Command: command,
 	}
@@ -42,4 +50,10 @@ func (m *MainCommand) Run() error {
 		return err
 	}
 	return m.Command.Run()
+}
+
+func InitializeDependencies() Dependencies {
+	return Dependencies{
+		InetCafeDao: dao.NewInternetCafeDao(),
+	}
 }

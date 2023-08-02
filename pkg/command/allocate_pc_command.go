@@ -2,6 +2,7 @@ package command
 
 import (
 	"fmt"
+	"internet-cafe/pkg/dao"
 	"strconv"
 	"strings"
 
@@ -9,11 +10,12 @@ import (
 )
 
 type AllocatePC struct {
-	user *model.User
+	InetCafeDao *dao.InternetCafeDao
+	user        *model.User
 }
 
 func (a *AllocatePC) Run() error {
-	inetCafe, err := model.GetInternetCafe()
+	inetCafe, err := a.InetCafeDao.Get()
 	if err != nil {
 		fmt.Println("error allocate PC")
 		return err
